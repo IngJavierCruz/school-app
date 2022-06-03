@@ -1,0 +1,18 @@
+/* You can add global styles to this file, and also import other style files */
+@import "./base/_normalize";
+
+// BOOTSTRAP
+@import "bootstrap/scss/bootstrap";
+
+html, body { height: 100%; }
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.form-input-block {
+  display: block !important;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

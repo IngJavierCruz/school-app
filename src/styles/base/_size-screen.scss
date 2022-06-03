@@ -1,0 +1,74 @@
+// Sizes of screen
+
+$grid-breakpoints: (
+  // xs: 360px,
+  xs: 320px,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px
+);
+
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px
+);
+
+
+
+@mixin media($media) {
+  @if $media == xs {
+    @media (max-width: map-get($grid-breakpoints, xs)) { @content; }
+  }
+  @else if $media == sm {
+    @media (min-width: map-get($grid-breakpoints, xs)) and (max-width: map-get($grid-breakpoints, sm)) { @content; }
+  }
+  @else if $media == md {
+    @media (min-width: map-get($grid-breakpoints, sm)) and (max-width: map-get($grid-breakpoints, md)) { @content; }
+  }
+  @else if $media == lg {
+    @media (min-width: map-get($grid-breakpoints, md)) and (max-width: map-get($grid-breakpoints, lg)) { @content; }
+  }
+  @else if $media == xl {
+    @media (min-width: map-get($grid-breakpoints, lg)) { @content; }
+  }
+}
+
+
+@mixin media-fluid($media-start: xs, $media-end: xl) {
+  
+  @if $media-end == xl {
+    @media (min-width: map-get($grid-breakpoints, $media-start)) { @content; }
+  } @else {
+    @media (min-width: map-get($grid-breakpoints, $media-start)) and (max-width: map-get($grid-breakpoints, $media-end)) { @content; }
+  }
+}
+
+
+@mixin medias($medias...) {
+
+  @each $media in $medias {
+
+    @if $media == xs {
+      @media (max-width: map-get($grid-breakpoints, xs)) { @content; }
+    }
+    @else if $media == sm {
+      @media (min-width: map-get($grid-breakpoints, xs)) and (max-width: map-get($grid-breakpoints, sm)) { @content; }
+    }
+    @else if $media == md {
+      @media (min-width: map-get($grid-breakpoints, sm)) and (max-width: map-get($grid-breakpoints, md)) { @content; }
+    }
+    @else if $media == lg {
+      @media (min-width: map-get($grid-breakpoints, md)) and (max-width: map-get($grid-breakpoints, lg)) { @content; }
+    }
+    @else if $media == xl {
+      @media (min-width: map-get($grid-breakpoints, lg)) { @content; }
+    }
+  }
+
+}
+// $width-sidebar:
+// $height-sidebar:
+// $width-navbar:
