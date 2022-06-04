@@ -1,0 +1,20 @@
+<mat-toolbar mat-dialog-title color="primary" class="toolbar-header--dialog">
+  <span>{{ title }}</span>
+
+  <div right>
+    <button
+      *ngIf="drag"
+      type="button"
+      mat-icon-button
+      cdkDrag
+      cdkDragRootElement=".cdk-overlay-pane"
+      cdkDragHandle
+    >
+      <mat-icon>drag_indicator</mat-icon>
+    </button>
+
+    <button type="button" mat-icon-button (click)="close()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+</mat-toolbar>
