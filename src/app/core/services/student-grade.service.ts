@@ -2,13 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@env/environment';
 import { DataResponse } from '@models/data/data-response';
-import { Student } from '@models/student/Student';
+import { StudentGrade } from '@models/student_grade/StudentGrade';
 
 @Injectable({
   providedIn: 'root'
 })
-export class StudentService {
-  private url = `${environment.host}/student`;
+export class StudentGradeService {
+  private url = `${environment.host}/studentsGrade`;
 
   constructor(private http: HttpClient) {}
 
@@ -21,12 +21,12 @@ export class StudentService {
     return this.http.get<DataResponse>(this.url);
   }
 
-  save(student: Student) {
-    return this.http.post<DataResponse>(this.url, student);
+  save(studentGrade: StudentGrade) {
+    return this.http.post<DataResponse>(this.url, studentGrade);
   }
 
-  update(student: Student) {
-    return this.http.put<DataResponse>(this.url, student);
+  update(studentGrade: StudentGrade) {
+    return this.http.put<DataResponse>(this.url, studentGrade);
   }
 
   delete(id: string) {
