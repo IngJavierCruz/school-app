@@ -2,8 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@env/environment';
 import { DataResponse } from '@models/data/data-response';
-import { Student } from '@core/models/student/Student';
-
+import { Student } from '@models/student/Student';
 @Injectable({
   providedIn: 'root'
 })
