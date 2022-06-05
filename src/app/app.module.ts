@@ -11,6 +11,7 @@ import { SharedModule } from './shared/shared.module';
 import { AppComponent } from './app.component';
 import { StudentDialogComponent } from './student-view/student-dialog/student-dialog.component';
 import { TeacherDialogComponent } from './teacher-view/teacher-dialog/teacher-dialog.component';
+import { GradeDialogComponent } from './grade-view/grade-dialog/grade-dialog.component';
 
 // INTERCEPTORS
 import { interceptorProviders } from '@interceptors/interceptors';
@@ -41,6 +42,7 @@ const COMPONENTS = [
   GradeViewComponent,
   StudentDialogComponent,
   TeacherDialogComponent,
+  GradeDialogComponent,
 ];
 
 @NgModule({

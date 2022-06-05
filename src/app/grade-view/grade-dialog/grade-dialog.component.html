@@ -1,0 +1,42 @@
+<app-toolbar-dialog [title]="'Grado'" (closeDialog)="close()">
+</app-toolbar-dialog>
+
+<div class="container mt-3">
+  <form [formGroup]="form">
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="form-input-block" appearance="fill">
+          <mat-label>Nombre</mat-label>
+          <input matInput placeholder="Nombre" formControlName="name">
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="form-input-block" appearance="fill">
+          <mat-label>Maestro</mat-label>
+          <mat-select formControlName="teacher">
+              <mat-option
+                *ngFor="let teacher of teachers"
+                class="multiline-mat-option"
+                [value]="teacher.id"
+              >
+                {{ teacher.name + ' ' + teacher.lastName }}
+              </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="close()">Cancelar</button>
+  <button
+    mat-button
+    color="primary"
+    [disabled]="form.invalid"
+    (click)="initTransaction()"
+  >Guardar</button>
+</div>

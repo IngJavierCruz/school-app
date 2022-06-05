@@ -3,11 +3,13 @@ import { AfterViewInit, Component, ViewChild, OnInit, OnDestroy } from '@angular
 // ANGULAR MATERIAL
 import { MatTableDataSource } from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator'
+import { MatDialog } from '@angular/material/dialog';
 
 // RXJS
 import { Subscription } from 'rxjs/internal/Subscription';
 
 // COMPONENTS
+import { GradeDialogComponent } from './grade-dialog/grade-dialog.component';
 
 // SERVICES
 import { GradeService } from '@services/grade.service';
@@ -37,6 +39,7 @@ export class GradeViewComponent implements OnInit, AfterViewInit, OnDestroy {
     private gradeService: GradeService,
     private spinner: NgxSpinnerService,
     private sweetAlert2Service: SweetAlert2Service,
+    public dialog: MatDialog,
     ) {}
 
   ngOnInit() {
@@ -64,8 +67,21 @@ export class GradeViewComponent implements OnInit, AfterViewInit, OnDestroy {
     }));
   }
 
+  addGrade() {
+    this.showGradeDialog();
+  }
+
   editGrade(grade: Grade) {
-    alert("editar")
+    this.showGradeDialog(grade);
+  }
+
+  showGradeDialog(grade?: Grade) {
+    const dialogRef = this.dialog.open(GradeDialogComponent, { data: grade, disableClose: true });
+    this.subscription.add(dialogRef.afterClosed()
+    .subscribe(success => {
+      if (success)
+        this.getAllGrades();
+    }));
   }
 
   async deleteGrade(grade: Grade) {
