@@ -1,0 +1,20 @@
+.table-wrapper {
+  width: 100%;
+  max-height: 100%;
+  display: grid;
+  height: 100%;
+  grid-template-rows: 1fr auto;
+}
+
+.table-container {
+  max-width: calc(100% - 1rem);
+  margin: 0 0.5rem;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  min-width: 500px;
+}
