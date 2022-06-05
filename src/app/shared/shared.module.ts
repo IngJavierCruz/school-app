@@ -20,12 +20,12 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSortModule } from '@angular/material/sort';
 import { MatStepperModule } from '@angular/material/stepper';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatPaginatorIntlSpanish } from './MatPaginatorIntlSpanish';
 import { NgxSpinnerModule } from "ngx-spinner";
@@ -56,6 +56,7 @@ const MODULES_ANGULAR_MATERIAL = [
   MatTooltipModule,
   MatTableModule,
   MatTabsModule,
+  MatRadioModule,
   MatSelectModule,
   MatSidenavModule,
   MatSortModule,

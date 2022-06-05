@@ -3,11 +3,13 @@ import { AfterViewInit, Component, ViewChild, OnInit, OnDestroy } from '@angular
 // ANGULAR MATERIAL
 import { MatTableDataSource } from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator'
+import { MatDialog } from '@angular/material/dialog';
 
 // RXJS
 import { Subscription } from 'rxjs/internal/Subscription';
 
 // COMPONENTS
+import { StudentDialogComponent } from './student-dialog/student-dialog.component';
 
 // SERVICES
 import { StudentService } from '@services/student.service';
@@ -18,6 +20,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { Student } from '@models/student/Student';
 import { COLUMNS } from './columns';
 import { SweetAlert2Service } from '@services/sweet-alert2.service';
+
 @Component({
   selector: 'app-student-view',
   templateUrl: './student-view.component.html',
@@ -36,6 +39,7 @@ export class StudentViewComponent implements OnInit, AfterViewInit, OnDestroy {
     private studentService: StudentService,
     private spinner: NgxSpinnerService,
     private sweetAlert2Service: SweetAlert2Service,
+    public dialog: MatDialog,
     ) {}
 
   ngOnInit() {
@@ -63,8 +67,21 @@ export class StudentViewComponent implements OnInit, AfterViewInit, OnDestroy {
     }));
   }
 
+  addStudent() {
+    this.showStudentDialog();
+  }
+
   editStudent(student: Student) {
-    alert("editar")
+    this.showStudentDialog(student);
+  }
+
+  showStudentDialog(student?: Student) {
+    const dialogRef = this.dialog.open(StudentDialogComponent, { data: student, disableClose: true });
+    this.subscription.add(dialogRef.afterClosed()
+    .subscribe(success => {
+      if (success)
+        this.getAllStudents();
+    }));
   }
 
   async deleteStudent(student: Student) {
