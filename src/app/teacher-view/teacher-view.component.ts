@@ -17,6 +17,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 // MODELS
 import { Teacher } from '@models/teacher/Teacher';
 import { COLUMNS } from './columns';
+import { SweetAlert2Service } from '@services/sweet-alert2.service';
 
 @Component({
   selector: 'app-teacher-view',
@@ -34,7 +35,8 @@ export class TeacherViewComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(
     private teacherService: TeacherService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private sweetAlert2Service: SweetAlert2Service,
     ) {}
 
   ngOnInit() {
@@ -66,8 +68,19 @@ export class TeacherViewComponent implements OnInit, AfterViewInit, OnDestroy {
     alert("editar")
   }
 
-  deleteTeacher(teacher: Teacher) {
-    alert("eliminar")
+  async deleteTeacher(teacher: Teacher) {
+    if (await this.sweetAlert2Service.dialogConfirmElimination()) {
+      this.spinner.show();
+      this.subscription.add(this.teacherService.delete(teacher.id)
+      .subscribe({
+        next: ({ success }) => {
+          if (success)
+            this.getAllTeachers();
+        },
+        error: (e) => console.error(e),
+        complete: () => this.spinner.hide()
+      }));
+    }
   }
 
 }
