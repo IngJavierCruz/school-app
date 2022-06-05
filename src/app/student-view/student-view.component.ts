@@ -2,7 +2,6 @@ import { AfterViewInit, Component, ViewChild, OnInit, OnDestroy } from '@angular
 
 // ANGULAR MATERIAL
 import { MatTableDataSource } from '@angular/material/table';
-import { MatDialog } from '@angular/material/dialog';
 import {MatPaginator} from '@angular/material/paginator'
 
 // RXJS
@@ -14,7 +13,6 @@ import { Subscription } from 'rxjs/internal/Subscription';
 import { StudentService } from '@services/student.service';
 
 import { NgxSpinnerService } from 'ngx-spinner';
-// import { SweetAlert2Service } from '@services/sweetAlert2/sweet-alert2.service';
 
 // MODELS
 import { Student } from '@models/student/Student';
@@ -27,8 +25,7 @@ import { COLUMNS } from './columns';
 export class StudentViewComponent implements OnInit, AfterViewInit, OnDestroy {
   subscription: Subscription = new Subscription();
   displayedColumns: string[] = COLUMNS;
-  students: Student[] = [];
-  dataSource = new MatTableDataSource<Student>(this.students);
+  dataSource = new MatTableDataSource<Student>([]);
   pageSizeOptions: number[] = [5, 10, 25, 100];
   pageSize = 10;
 
