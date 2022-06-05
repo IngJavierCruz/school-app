@@ -1,0 +1,44 @@
+<app-toolbar-dialog [title]="'Maestro'" (closeDialog)="close()">
+</app-toolbar-dialog>
+
+<div class="container mt-3">
+  <form [formGroup]="form">
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="form-input-block" appearance="fill">
+          <mat-label>Nombre(s)</mat-label>
+          <input matInput placeholder="Nombre(s)" formControlName="name">
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="form-input-block" appearance="fill">
+          <mat-label>Apellido(s)</mat-label>
+          <input matInput placeholder="Apellido(s)" formControlName="lastName">
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <label>Género</label>
+        <mat-radio-group class="radio-group--gender" aria-label="Seleccione una opción" formControlName="gender">
+          <mat-radio-button [value]="false">Femenino</mat-radio-button>
+          <mat-radio-button [value]="true">Masculino</mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="close()">Cancelar</button>
+  <button
+    mat-button
+    color="primary"
+    [disabled]="form.invalid"
+    (click)="initTransaction()"
+  >Guardar</button>
+</div>

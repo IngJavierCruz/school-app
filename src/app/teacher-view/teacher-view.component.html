@@ -1,5 +1,16 @@
 
 <div class="table-wrapper">
+  <div class="ms-auto p-2">
+    <button
+      mat-mini-fab
+      color="primary"
+      matTooltip="Agregar Maestro"
+      (click)="addTeacher()"
+    >
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+
   <div class="table-container">
     <table mat-table [dataSource]="dataSource">
       <ng-container matColumnDef="name" sticky>

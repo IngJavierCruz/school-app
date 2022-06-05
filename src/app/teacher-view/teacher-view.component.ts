@@ -3,11 +3,13 @@ import { AfterViewInit, Component, ViewChild, OnInit, OnDestroy } from '@angular
 // ANGULAR MATERIAL
 import { MatTableDataSource } from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator'
+import { MatDialog } from '@angular/material/dialog';
 
 // RXJS
 import { Subscription } from 'rxjs/internal/Subscription';
 
 // COMPONENTS
+import { TeacherDialogComponent } from './teacher-dialog/teacher-dialog.component';
 
 // SERVICES
 import { TeacherService } from '@services/teacher.service';
@@ -37,6 +39,7 @@ export class TeacherViewComponent implements OnInit, AfterViewInit, OnDestroy {
     private teacherService: TeacherService,
     private spinner: NgxSpinnerService,
     private sweetAlert2Service: SweetAlert2Service,
+    public dialog: MatDialog,
     ) {}
 
   ngOnInit() {
@@ -64,8 +67,21 @@ export class TeacherViewComponent implements OnInit, AfterViewInit, OnDestroy {
     }));
   }
 
-  editTeacher(teacher: Teacher) {
-    alert("editar")
+  addTeacher() {
+    this.showTeacherDialog();
+  }
+
+  editTeacher(student: Teacher) {
+    this.showTeacherDialog(student);
+  }
+
+  showTeacherDialog(student?: Teacher) {
+    const dialogRef = this.dialog.open(TeacherDialogComponent, { data: student, disableClose: true });
+    this.subscription.add(dialogRef.afterClosed()
+    .subscribe(success => {
+      if (success)
+        this.getAllTeachers();
+    }));
   }
 
   async deleteTeacher(teacher: Teacher) {
