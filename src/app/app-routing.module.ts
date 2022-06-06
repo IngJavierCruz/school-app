@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { StudentViewComponent } from './student-view/student-view.component';
 import { TeacherViewComponent } from './teacher-view/teacher-view.component';
 import { GradeViewComponent } from './grade-view/grade-view.component';
+import { StudentGradeViewComponent } from './student-grade-view/student-grade-view.component';
 
 const routes: Routes = [
   {
@@ -17,10 +18,10 @@ const routes: Routes = [
     path: 'grados',
     component: GradeViewComponent
   },
-  // {
-  //   path: 'estudiante-grados',
-  //   component: LayoutComponent
-  // },
+  {
+    path: 'estudiantes-grados',
+    component: StudentGradeViewComponent
+  },
   {
     path: '**',
     redirectTo: 'estudiantes'

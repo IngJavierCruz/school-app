@@ -12,6 +12,11 @@ import { AppComponent } from './app.component';
 import { StudentDialogComponent } from './student-view/student-dialog/student-dialog.component';
 import { TeacherDialogComponent } from './teacher-view/teacher-dialog/teacher-dialog.component';
 import { GradeDialogComponent } from './grade-view/grade-dialog/grade-dialog.component';
+import { StudentViewComponent } from './student-view/student-view.component';
+import { TeacherViewComponent } from './teacher-view/teacher-view.component';
+import { GradeViewComponent } from './grade-view/grade-view.component';
+import { StudentGradeViewComponent } from './student-grade-view/student-grade-view.component';
+import { StudentGradeDialogComponent } from './student-grade-view/student-grade-dialog/student-grade-dialog.component';
 
 // INTERCEPTORS
 import { interceptorProviders } from '@interceptors/interceptors';
@@ -20,9 +25,7 @@ import { interceptorProviders } from '@interceptors/interceptors';
 import { LOCALE_ID } from '@angular/core';
 import es from '@angular/common/locales/es';
 import { registerLocaleData, AsyncPipe } from '@angular/common';
-import { StudentViewComponent } from './student-view/student-view.component';
-import { TeacherViewComponent } from './teacher-view/teacher-view.component';
-import { GradeViewComponent } from './grade-view/grade-view.component';
+
 registerLocaleData(es, "MXN");
 
 const MODULES = [
@@ -43,6 +46,8 @@ const COMPONENTS = [
   StudentDialogComponent,
   TeacherDialogComponent,
   GradeDialogComponent,
+  StudentGradeViewComponent,
+  StudentGradeDialogComponent,
 ];
 
 @NgModule({

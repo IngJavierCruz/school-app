@@ -9,41 +9,41 @@ import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs/internal/Subscription';
 
 // COMPONENTS
-import { StudentDialogComponent } from './student-dialog/student-dialog.component';
+import { StudentGradeDialogComponent } from './student-grade-dialog/student-grade-dialog.component';
 
 // SERVICES
-import { StudentService } from '@services/student.service';
+import { StudentGradeService } from '@services/student-grade.service';
 
 import { NgxSpinnerService } from 'ngx-spinner';
 
 // MODELS
-import { Student } from '@models/student/Student';
+import { StudentGrade } from '@models/student_grade/StudentGrade';
 import { COLUMNS } from './columns';
 import { SweetAlert2Service } from '@services/sweet-alert2.service';
 
 @Component({
-  selector: 'app-student-view',
-  templateUrl: './student-view.component.html',
-  styleUrls: ['./student-view.component.scss']
+  selector: 'app-student-studentGrade-view',
+  templateUrl: './student-grade-view.component.html',
+  styleUrls: ['./student-grade-view.component.scss']
 })
-export class StudentViewComponent implements OnInit, AfterViewInit, OnDestroy {
+export class StudentGradeViewComponent implements OnInit, AfterViewInit, OnDestroy {
   subscription: Subscription = new Subscription();
   displayedColumns: string[] = COLUMNS;
-  dataSource = new MatTableDataSource<Student>([]);
+  dataSource = new MatTableDataSource<StudentGrade>([]);
   pageSizeOptions: number[] = [5, 10, 25, 100];
   pageSize = 10;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(
-    private studentService: StudentService,
+    private studentGradeService: StudentGradeService,
     private spinner: NgxSpinnerService,
     private sweetAlert2Service: SweetAlert2Service,
     public dialog: MatDialog,
     ) {}
 
   ngOnInit() {
-    this.getAllStudents();
+    this.getAllStudentGrades();
   }
 
   ngAfterViewInit() {
@@ -54,47 +54,44 @@ export class StudentViewComponent implements OnInit, AfterViewInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  getAllStudents() {
+  getAllStudentGrades() {
     this.spinner.show();
-    this.subscription.add(this.studentService.getAll()
+    this.subscription.add(this.studentGradeService.getAll()
     .subscribe({
       next: ({ data, success }) => {
         if (success)
-          this.dataSource.data = data as Student[];
+          this.dataSource.data = data as StudentGrade[];
       },
       error: (e) => console.error(e),
       complete: () => this.spinner.hide()
     }));
   }
 
-  addStudent() {
-    this.showStudentDialog();
+  addAssignment() {
+    this.showGradeDialog();
   }
 
-  editStudent(student: Student) {
-    this.showStudentDialog(student);
+  editAssignment(studentGrade: StudentGrade) {
+    this.showGradeDialog(studentGrade);
   }
 
-  showStudentDialog(student?: Student) {
-    const dialogRef = this.dialog.open(StudentDialogComponent, { data: student, disableClose: true });
+  showGradeDialog(studentGrade?: StudentGrade) {
+    const dialogRef = this.dialog.open(StudentGradeDialogComponent, { data: studentGrade, disableClose: true });
     this.subscription.add(dialogRef.afterClosed()
     .subscribe(success => {
       if (success)
-        this.getAllStudents();
+        this.getAllStudentGrades();
     }));
   }
 
-  async deleteStudent(student: Student) {
+  async deleteAssignment(studentGrade: StudentGrade) {
     if (await this.sweetAlert2Service.dialogConfirmElimination()) {
       this.spinner.show();
-      this.subscription.add(this.studentService.delete(student.id)
+      this.subscription.add(this.studentGradeService.delete(studentGrade.id)
       .subscribe({
-        next: ({ success, message }) => {
-          if (success) {
-            this.getAllStudents();
-          } else {
-            this.sweetAlert2Service.showAlertError(message);
-          }
+        next: ({ success }) => {
+          if (success)
+            this.getAllStudentGrades();
         },
         error: (e) => {
           console.error(e);

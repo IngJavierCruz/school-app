@@ -1,0 +1,59 @@
+<app-toolbar-dialog [title]="'Estudiante Grado'" (closeDialog)="close()">
+</app-toolbar-dialog>
+
+<div class="container mt-3">
+  <form [formGroup]="form">
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="form-input-block" appearance="fill">
+          <mat-label>Sección</mat-label>
+          <input matInput placeholder="Sección" formControlName="seccion">
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="form-input-block" appearance="fill">
+          <mat-label>Estudiante</mat-label>
+          <mat-select formControlName="student">
+              <mat-option
+                *ngFor="let student of students"
+                class="multiline-mat-option"
+                [value]="student.id"
+              >
+                {{ student.name + ' ' + student.lastName }}
+              </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="form-input-block" appearance="fill">
+          <mat-label>Grado</mat-label>
+          <mat-select formControlName="grade">
+              <mat-option
+                *ngFor="let grade of grades"
+                class="multiline-mat-option"
+                [value]="grade.id"
+              >
+                {{ grade.name }}
+              </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="close()">Cancelar</button>
+  <button
+    mat-button
+    color="primary"
+    [disabled]="form.invalid"
+    (click)="initTransaction()"
+  >Guardar</button>
+</div>

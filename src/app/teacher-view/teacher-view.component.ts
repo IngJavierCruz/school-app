@@ -89,9 +89,12 @@ export class TeacherViewComponent implements OnInit, AfterViewInit, OnDestroy {
       this.spinner.show();
       this.subscription.add(this.teacherService.delete(teacher.id)
       .subscribe({
-        next: ({ success }) => {
-          if (success)
+        next: ({ success, message }) => {
+          if (success) {
             this.getAllTeachers();
+          } else {
+            this.sweetAlert2Service.showAlertError(message);
+          }
         },
         error: (e) => {
           console.error(e);

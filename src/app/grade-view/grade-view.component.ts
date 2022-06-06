@@ -89,9 +89,12 @@ export class GradeViewComponent implements OnInit, AfterViewInit, OnDestroy {
       this.spinner.show();
       this.subscription.add(this.gradeService.delete(grade.id)
       .subscribe({
-        next: ({ success }) => {
-          if (success)
+        next: ({ success, message }) => {
+          if (success) {
             this.getAllGrades();
+          } else {
+            this.sweetAlert2Service.showAlertError(message);
+          }
         },
         error: (e) => {
           console.error(e);
