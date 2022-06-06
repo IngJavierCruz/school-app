@@ -16,7 +16,7 @@ import { TeacherService } from '@services/teacher.service';
 @Component({
   selector: 'app-teacher-dialog',
   templateUrl: './teacher-dialog.component.html',
-  styleUrls: ['./teacher-dialog.component.css']
+  styleUrls: ['./teacher-dialog.component.scss']
 })
 export class TeacherDialogComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
