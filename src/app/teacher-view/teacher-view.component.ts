@@ -93,7 +93,11 @@ export class TeacherViewComponent implements OnInit, AfterViewInit, OnDestroy {
           if (success)
             this.getAllTeachers();
         },
-        error: (e) => console.error(e),
+        error: (e) => {
+          console.error(e);
+          this.sweetAlert2Service.showAlertError(e.message);
+          this.spinner.hide();
+        },
         complete: () => this.spinner.hide()
       }));
     }

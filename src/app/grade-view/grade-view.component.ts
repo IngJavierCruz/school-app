@@ -93,7 +93,11 @@ export class GradeViewComponent implements OnInit, AfterViewInit, OnDestroy {
           if (success)
             this.getAllGrades();
         },
-        error: (e) => console.error(e),
+        error: (e) => {
+          console.error(e);
+          this.sweetAlert2Service.showAlertError(e.message);
+          this.spinner.hide();
+        },
         complete: () => this.spinner.hide()
       }));
     }
